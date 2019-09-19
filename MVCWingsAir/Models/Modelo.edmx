@@ -1,0 +1,485 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WingsAirModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Aeropuertos">
+          <Key>
+            <PropertyRef Name="IdAeropuerto" />
+          </Key>
+          <Property Name="IdAeropuerto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Municipio" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Pais" Type="varbinary" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Aviones">
+          <Key>
+            <PropertyRef Name="IdAvion" />
+          </Key>
+          <Property Name="IdAvion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="IdTipoAvion" Type="int" Nullable="false" />
+          <Property Name="HorasVuelo" Type="int" Nullable="false" />
+          <Property Name="Capacidad" Type="int" Nullable="false" />
+          <Property Name="Estatus" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pilotos">
+          <Key>
+            <PropertyRef Name="IdPiloto" />
+          </Key>
+          <Property Name="IdPiloto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCompleto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Sexo" Type="bit" Nullable="false" />
+          <Property Name="HorasVuelo" Type="int" Nullable="false" />
+          <Property Name="Estatus" Type="bit" Nullable="false" />
+          <Property Name="IdTipoPiloto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoAvion">
+          <Key>
+            <PropertyRef Name="IdTipoAvion" />
+          </Key>
+          <Property Name="IdTipoAvion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoPiloto">
+          <Key>
+            <PropertyRef Name="IdTipoPiloto" />
+          </Key>
+          <Property Name="IdTipoPiloto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="7" />
+        </EntityType>
+        <EntityType Name="Vuelos">
+          <Key>
+            <PropertyRef Name="IdVuelo" />
+          </Key>
+          <Property Name="IdVuelo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numerovuelo" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="Estatus" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="IdPiloto" Type="int" Nullable="false" />
+          <Property Name="IdAvion" Type="int" Nullable="false" />
+          <Property Name="IdOrigen" Type="int" Nullable="false" />
+          <Property Name="IdDestino" Type="int" Nullable="false" />
+          <Property Name="FechaVuelo" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Aviones_TipoAvion">
+          <End Role="TipoAvion" Type="Self.TipoAvion" Multiplicity="1" />
+          <End Role="Aviones" Type="Self.Aviones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoAvion">
+              <PropertyRef Name="IdTipoAvion" />
+            </Principal>
+            <Dependent Role="Aviones">
+              <PropertyRef Name="IdTipoAvion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pilotos_TipoPiloto">
+          <End Role="TipoPiloto" Type="Self.TipoPiloto" Multiplicity="1" />
+          <End Role="Pilotos" Type="Self.Pilotos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPiloto">
+              <PropertyRef Name="IdTipoPiloto" />
+            </Principal>
+            <Dependent Role="Pilotos">
+              <PropertyRef Name="IdTipoPiloto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vuelos_Aeropuertos">
+          <End Role="Aeropuertos" Type="Self.Aeropuertos" Multiplicity="1" />
+          <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeropuertos">
+              <PropertyRef Name="IdAeropuerto" />
+            </Principal>
+            <Dependent Role="Vuelos">
+              <PropertyRef Name="IdOrigen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vuelos_Aeropuertos1">
+          <End Role="Aeropuertos" Type="Self.Aeropuertos" Multiplicity="1" />
+          <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeropuertos">
+              <PropertyRef Name="IdAeropuerto" />
+            </Principal>
+            <Dependent Role="Vuelos">
+              <PropertyRef Name="IdDestino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vuelos_Aviones">
+          <End Role="Aviones" Type="Self.Aviones" Multiplicity="1" />
+          <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aviones">
+              <PropertyRef Name="IdAvion" />
+            </Principal>
+            <Dependent Role="Vuelos">
+              <PropertyRef Name="IdAvion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vuelos_Pilotos">
+          <End Role="Pilotos" Type="Self.Pilotos" Multiplicity="1" />
+          <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pilotos">
+              <PropertyRef Name="IdPiloto" />
+            </Principal>
+            <Dependent Role="Vuelos">
+              <PropertyRef Name="IdPiloto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WingsAirModelStoreContainer">
+          <EntitySet Name="Aeropuertos" EntityType="Self.Aeropuertos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Aviones" EntityType="Self.Aviones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pilotos" EntityType="Self.Pilotos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoAvion" EntityType="Self.TipoAvion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoPiloto" EntityType="Self.TipoPiloto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vuelos" EntityType="Self.Vuelos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Aviones_TipoAvion" Association="Self.FK_Aviones_TipoAvion">
+            <End Role="TipoAvion" EntitySet="TipoAvion" />
+            <End Role="Aviones" EntitySet="Aviones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pilotos_TipoPiloto" Association="Self.FK_Pilotos_TipoPiloto">
+            <End Role="TipoPiloto" EntitySet="TipoPiloto" />
+            <End Role="Pilotos" EntitySet="Pilotos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vuelos_Aeropuertos" Association="Self.FK_Vuelos_Aeropuertos">
+            <End Role="Aeropuertos" EntitySet="Aeropuertos" />
+            <End Role="Vuelos" EntitySet="Vuelos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vuelos_Aeropuertos1" Association="Self.FK_Vuelos_Aeropuertos1">
+            <End Role="Aeropuertos" EntitySet="Aeropuertos" />
+            <End Role="Vuelos" EntitySet="Vuelos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vuelos_Aviones" Association="Self.FK_Vuelos_Aviones">
+            <End Role="Aviones" EntitySet="Aviones" />
+            <End Role="Vuelos" EntitySet="Vuelos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vuelos_Pilotos" Association="Self.FK_Vuelos_Pilotos">
+            <End Role="Pilotos" EntitySet="Pilotos" />
+            <End Role="Vuelos" EntitySet="Vuelos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WingsAirModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Aeropuertos">
+          <Key>
+            <PropertyRef Name="IdAeropuerto" />
+          </Key>
+          <Property Name="IdAeropuerto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Municipio" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pais" Type="Binary" MaxLength="50" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Vuelos" Relationship="Self.FK_Vuelos_Aeropuertos" FromRole="Aeropuertos" ToRole="Vuelos" />
+          <NavigationProperty Name="Vuelos1" Relationship="Self.FK_Vuelos_Aeropuertos1" FromRole="Aeropuertos" ToRole="Vuelos" />
+        </EntityType>
+        <EntityType Name="Aviones">
+          <Key>
+            <PropertyRef Name="IdAvion" />
+          </Key>
+          <Property Name="IdAvion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdTipoAvion" Type="Int32" Nullable="false" />
+          <Property Name="HorasVuelo" Type="Int32" Nullable="false" />
+          <Property Name="Capacidad" Type="Int32" Nullable="false" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TipoAvion" Relationship="Self.FK_Aviones_TipoAvion" FromRole="Aviones" ToRole="TipoAvion" />
+          <NavigationProperty Name="Vuelos" Relationship="Self.FK_Vuelos_Aviones" FromRole="Aviones" ToRole="Vuelos" />
+        </EntityType>
+        <EntityType Name="OrigenDestino">
+          <Key>
+            <PropertyRef Name="IdOrigenDestino" />
+          </Key>
+          <Property Name="IdOrigenDestino" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Vuelos" Relationship="Self.FK_Vuelos_OrigenDestino" FromRole="OrigenDestino" ToRole="Vuelos" />
+          <NavigationProperty Name="Vuelos1" Relationship="Self.FK_Vuelos_OrigenDestino1" FromRole="OrigenDestino" ToRole="Vuelos" />
+        </EntityType>
+        <EntityType Name="Pilotos">
+          <Key>
+            <PropertyRef Name="IdPiloto" />
+          </Key>
+          <Property Name="IdPiloto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCompleto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sexo" Type="Boolean" Nullable="false" />
+          <Property Name="HorasVuelo" Type="Int32" Nullable="false" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+          <Property Name="IdTipoPiloto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TipoPiloto" Relationship="Self.FK_Pilotos_TipoPiloto" FromRole="Pilotos" ToRole="TipoPiloto" />
+          <NavigationProperty Name="Vuelos" Relationship="Self.FK_Vuelos_Pilotos" FromRole="Pilotos" ToRole="Vuelos" />
+        </EntityType>
+        <EntityType Name="TipoAvion">
+          <Key>
+            <PropertyRef Name="IdTipoAvion" />
+          </Key>
+          <Property Name="IdTipoAvion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Aviones" Relationship="Self.FK_Aviones_TipoAvion" FromRole="TipoAvion" ToRole="Aviones" />
+        </EntityType>
+        <EntityType Name="TipoPiloto">
+          <Key>
+            <PropertyRef Name="IdTipoPiloto" />
+          </Key>
+          <Property Name="IdTipoPiloto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pilotos" Relationship="Self.FK_Pilotos_TipoPiloto" FromRole="TipoPiloto" ToRole="Pilotos" />
+        </EntityType>
+        <EntityType Name="Vuelos">
+          <Key>
+            <PropertyRef Name="IdVuelo" />
+          </Key>
+          <Property Name="IdVuelo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numerovuelo" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estatus" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdPiloto" Type="Int32" Nullable="false" />
+          <Property Name="IdAvion" Type="Int32" Nullable="false" />
+          <Property Name="IdOrigen" Type="Int32" Nullable="false" />
+          <Property Name="IdDestino" Type="Int32" Nullable="false" />
+          <Property Name="FechaVuelo" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Aeropuertos" Relationship="Self.FK_Vuelos_Aeropuertos" FromRole="Vuelos" ToRole="Aeropuertos" />
+          <NavigationProperty Name="Aeropuertos1" Relationship="Self.FK_Vuelos_Aeropuertos1" FromRole="Vuelos" ToRole="Aeropuertos" />
+          <NavigationProperty Name="Aviones" Relationship="Self.FK_Vuelos_Aviones" FromRole="Vuelos" ToRole="Aviones" />
+          <NavigationProperty Name="OrigenDestino" Relationship="Self.FK_Vuelos_OrigenDestino" FromRole="Vuelos" ToRole="OrigenDestino" />
+          <NavigationProperty Name="OrigenDestino1" Relationship="Self.FK_Vuelos_OrigenDestino1" FromRole="Vuelos" ToRole="OrigenDestino" />
+          <NavigationProperty Name="Pilotos" Relationship="Self.FK_Vuelos_Pilotos" FromRole="Vuelos" ToRole="Pilotos" />
+        </EntityType>
+        <Association Name="FK_Vuelos_Aeropuertos">
+          <End Role="Aeropuertos" Type="Self.Aeropuertos" Multiplicity="1" />
+          <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeropuertos">
+              <PropertyRef Name="IdAeropuerto" />
+            </Principal>
+            <Dependent Role="Vuelos">
+              <PropertyRef Name="IdOrigen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vuelos_Aeropuertos1">
+          <End Role="Aeropuertos" Type="Self.Aeropuertos" Multiplicity="1" />
+          <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeropuertos">
+              <PropertyRef Name="IdAeropuerto" />
+            </Principal>
+            <Dependent Role="Vuelos">
+              <PropertyRef Name="IdDestino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Aviones_TipoAvion">
+          <End Role="TipoAvion" Type="Self.TipoAvion" Multiplicity="1" />
+          <End Role="Aviones" Type="Self.Aviones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoAvion">
+              <PropertyRef Name="IdTipoAvion" />
+            </Principal>
+            <Dependent Role="Aviones">
+              <PropertyRef Name="IdTipoAvion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vuelos_Aviones">
+          <End Role="Aviones" Type="Self.Aviones" Multiplicity="1" />
+          <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aviones">
+              <PropertyRef Name="IdAvion" />
+            </Principal>
+            <Dependent Role="Vuelos">
+              <PropertyRef Name="IdAvion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vuelos_OrigenDestino">
+          <End Role="OrigenDestino" Type="Self.OrigenDestino" Multiplicity="1" />
+          <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrigenDestino">
+              <PropertyRef Name="IdOrigenDestino" />
+            </Principal>
+            <Dependent Role="Vuelos">
+              <PropertyRef Name="IdOrigen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vuelos_OrigenDestino1">
+          <End Role="OrigenDestino" Type="Self.OrigenDestino" Multiplicity="1" />
+          <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrigenDestino">
+              <PropertyRef Name="IdOrigenDestino" />
+            </Principal>
+            <Dependent Role="Vuelos">
+              <PropertyRef Name="IdDestino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pilotos_TipoPiloto">
+          <End Role="TipoPiloto" Type="Self.TipoPiloto" Multiplicity="1" />
+          <End Role="Pilotos" Type="Self.Pilotos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPiloto">
+              <PropertyRef Name="IdTipoPiloto" />
+            </Principal>
+            <Dependent Role="Pilotos">
+              <PropertyRef Name="IdTipoPiloto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vuelos_Pilotos">
+          <End Role="Pilotos" Type="Self.Pilotos" Multiplicity="1" />
+          <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pilotos">
+              <PropertyRef Name="IdPiloto" />
+            </Principal>
+            <Dependent Role="Vuelos">
+              <PropertyRef Name="IdPiloto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WingsAirEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Aeropuertos" EntityType="Self.Aeropuertos" />
+          <EntitySet Name="Aviones" EntityType="Self.Aviones" />
+          <EntitySet Name="OrigenDestino" EntityType="Self.OrigenDestino" />
+          <EntitySet Name="Pilotos" EntityType="Self.Pilotos" />
+          <EntitySet Name="TipoAvion" EntityType="Self.TipoAvion" />
+          <EntitySet Name="TipoPiloto" EntityType="Self.TipoPiloto" />
+          <EntitySet Name="Vuelos" EntityType="Self.Vuelos" />
+          <AssociationSet Name="FK_Vuelos_Aeropuertos" Association="Self.FK_Vuelos_Aeropuertos">
+            <End Role="Aeropuertos" EntitySet="Aeropuertos" />
+            <End Role="Vuelos" EntitySet="Vuelos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vuelos_Aeropuertos1" Association="Self.FK_Vuelos_Aeropuertos1">
+            <End Role="Aeropuertos" EntitySet="Aeropuertos" />
+            <End Role="Vuelos" EntitySet="Vuelos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Aviones_TipoAvion" Association="Self.FK_Aviones_TipoAvion">
+            <End Role="TipoAvion" EntitySet="TipoAvion" />
+            <End Role="Aviones" EntitySet="Aviones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vuelos_Aviones" Association="Self.FK_Vuelos_Aviones">
+            <End Role="Aviones" EntitySet="Aviones" />
+            <End Role="Vuelos" EntitySet="Vuelos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vuelos_OrigenDestino" Association="Self.FK_Vuelos_OrigenDestino">
+            <End Role="OrigenDestino" EntitySet="OrigenDestino" />
+            <End Role="Vuelos" EntitySet="Vuelos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vuelos_OrigenDestino1" Association="Self.FK_Vuelos_OrigenDestino1">
+            <End Role="OrigenDestino" EntitySet="OrigenDestino" />
+            <End Role="Vuelos" EntitySet="Vuelos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pilotos_TipoPiloto" Association="Self.FK_Pilotos_TipoPiloto">
+            <End Role="TipoPiloto" EntitySet="TipoPiloto" />
+            <End Role="Pilotos" EntitySet="Pilotos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vuelos_Pilotos" Association="Self.FK_Vuelos_Pilotos">
+            <End Role="Pilotos" EntitySet="Pilotos" />
+            <End Role="Vuelos" EntitySet="Vuelos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WingsAirModelStoreContainer" CdmEntityContainer="WingsAirEntities">
+          <EntitySetMapping Name="Aeropuertos">
+            <EntityTypeMapping TypeName="WingsAirModel.Aeropuertos">
+              <MappingFragment StoreEntitySet="Aeropuertos">
+                <ScalarProperty Name="IdAeropuerto" ColumnName="IdAeropuerto" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Aviones">
+            <EntityTypeMapping TypeName="WingsAirModel.Aviones">
+              <MappingFragment StoreEntitySet="Aviones">
+                <ScalarProperty Name="IdAvion" ColumnName="IdAvion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdTipoAvion" ColumnName="IdTipoAvion" />
+                <ScalarProperty Name="HorasVuelo" ColumnName="HorasVuelo" />
+                <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pilotos">
+            <EntityTypeMapping TypeName="WingsAirModel.Pilotos">
+              <MappingFragment StoreEntitySet="Pilotos">
+                <ScalarProperty Name="IdPiloto" ColumnName="IdPiloto" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="HorasVuelo" ColumnName="HorasVuelo" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="IdTipoPiloto" ColumnName="IdTipoPiloto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoAvion">
+            <EntityTypeMapping TypeName="WingsAirModel.TipoAvion">
+              <MappingFragment StoreEntitySet="TipoAvion">
+                <ScalarProperty Name="IdTipoAvion" ColumnName="IdTipoAvion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoPiloto">
+            <EntityTypeMapping TypeName="WingsAirModel.TipoPiloto">
+              <MappingFragment StoreEntitySet="TipoPiloto">
+                <ScalarProperty Name="IdTipoPiloto" ColumnName="IdTipoPiloto" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vuelos">
+            <EntityTypeMapping TypeName="WingsAirModel.Vuelos">
+              <MappingFragment StoreEntitySet="Vuelos">
+                <ScalarProperty Name="IdVuelo" ColumnName="IdVuelo" />
+                <ScalarProperty Name="Numerovuelo" ColumnName="Numerovuelo" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="IdPiloto" ColumnName="IdPiloto" />
+                <ScalarProperty Name="IdAvion" ColumnName="IdAvion" />
+                <ScalarProperty Name="IdOrigen" ColumnName="IdOrigen" />
+                <ScalarProperty Name="IdDestino" ColumnName="IdDestino" />
+                <ScalarProperty Name="FechaVuelo" ColumnName="FechaVuelo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

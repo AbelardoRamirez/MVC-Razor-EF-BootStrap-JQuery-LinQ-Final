@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="68e9745cc47f4a25996840ad19588116" Name="Diagram1">
+        <EntityTypeShape EntityType="WingsAirModel.Aeropuertos" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WingsAirModel.Aviones" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WingsAirModel.Pilotos" Width="1.5" PointX="1.5" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WingsAirModel.TipoAvion" Width="1.5" PointX="1.5" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WingsAirModel.TipoPiloto" Width="1.5" PointX="1.5" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WingsAirModel.Vuelos" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="WingsAirModel.FK_Vuelos_Aeropuertos" ManuallyRouted="false" />
+        <AssociationConnector Association="WingsAirModel.FK_Vuelos_Aeropuertos1" ManuallyRouted="false" />
+        <AssociationConnector Association="WingsAirModel.FK_Aviones_TipoAvion" ManuallyRouted="false" />
+        <AssociationConnector Association="WingsAirModel.FK_Vuelos_Aviones" ManuallyRouted="false" />
+        <AssociationConnector Association="WingsAirModel.FK_Pilotos_TipoPiloto" ManuallyRouted="false" />
+        <AssociationConnector Association="WingsAirModel.FK_Vuelos_Pilotos" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

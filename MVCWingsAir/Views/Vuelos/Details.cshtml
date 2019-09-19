@@ -1,0 +1,90 @@
+﻿@model MVCWingsAir.Models.Vuelos
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vuelos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Numerovuelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Numerovuelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaVuelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaVuelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aeropuertos.Municipio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aeropuertos.Municipio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aeropuertos1.Municipio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aeropuertos1.Municipio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aviones.Codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aviones.Codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrigenDestino.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrigenDestino.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrigenDestino1.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrigenDestino1.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pilotos.NombreCompleto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pilotos.NombreCompleto)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdVuelo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
