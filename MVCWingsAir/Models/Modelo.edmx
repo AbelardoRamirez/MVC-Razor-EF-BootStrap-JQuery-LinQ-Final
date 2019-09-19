@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="WingsAirModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="WingsAirModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Aeropuertos">
           <Key>
             <PropertyRef Name="IdAeropuerto" />
@@ -167,7 +167,8 @@
             <End Role="Vuelos" EntitySet="Vuelos" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WingsAirModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -194,15 +195,6 @@
           <Property Name="Estatus" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TipoAvion" Relationship="Self.FK_Aviones_TipoAvion" FromRole="Aviones" ToRole="TipoAvion" />
           <NavigationProperty Name="Vuelos" Relationship="Self.FK_Vuelos_Aviones" FromRole="Aviones" ToRole="Vuelos" />
-        </EntityType>
-        <EntityType Name="OrigenDestino">
-          <Key>
-            <PropertyRef Name="IdOrigenDestino" />
-          </Key>
-          <Property Name="IdOrigenDestino" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Vuelos" Relationship="Self.FK_Vuelos_OrigenDestino" FromRole="OrigenDestino" ToRole="Vuelos" />
-          <NavigationProperty Name="Vuelos1" Relationship="Self.FK_Vuelos_OrigenDestino1" FromRole="OrigenDestino" ToRole="Vuelos" />
         </EntityType>
         <EntityType Name="Pilotos">
           <Key>
@@ -248,8 +240,6 @@
           <NavigationProperty Name="Aeropuertos" Relationship="Self.FK_Vuelos_Aeropuertos" FromRole="Vuelos" ToRole="Aeropuertos" />
           <NavigationProperty Name="Aeropuertos1" Relationship="Self.FK_Vuelos_Aeropuertos1" FromRole="Vuelos" ToRole="Aeropuertos" />
           <NavigationProperty Name="Aviones" Relationship="Self.FK_Vuelos_Aviones" FromRole="Vuelos" ToRole="Aviones" />
-          <NavigationProperty Name="OrigenDestino" Relationship="Self.FK_Vuelos_OrigenDestino" FromRole="Vuelos" ToRole="OrigenDestino" />
-          <NavigationProperty Name="OrigenDestino1" Relationship="Self.FK_Vuelos_OrigenDestino1" FromRole="Vuelos" ToRole="OrigenDestino" />
           <NavigationProperty Name="Pilotos" Relationship="Self.FK_Vuelos_Pilotos" FromRole="Vuelos" ToRole="Pilotos" />
         </EntityType>
         <Association Name="FK_Vuelos_Aeropuertos">
@@ -300,30 +290,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Vuelos_OrigenDestino">
-          <End Role="OrigenDestino" Type="Self.OrigenDestino" Multiplicity="1" />
-          <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrigenDestino">
-              <PropertyRef Name="IdOrigenDestino" />
-            </Principal>
-            <Dependent Role="Vuelos">
-              <PropertyRef Name="IdOrigen" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Vuelos_OrigenDestino1">
-          <End Role="OrigenDestino" Type="Self.OrigenDestino" Multiplicity="1" />
-          <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrigenDestino">
-              <PropertyRef Name="IdOrigenDestino" />
-            </Principal>
-            <Dependent Role="Vuelos">
-              <PropertyRef Name="IdDestino" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Pilotos_TipoPiloto">
           <End Role="TipoPiloto" Type="Self.TipoPiloto" Multiplicity="1" />
           <End Role="Pilotos" Type="Self.Pilotos" Multiplicity="*" />
@@ -351,7 +317,6 @@
         <EntityContainer Name="WingsAirEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Aeropuertos" EntityType="Self.Aeropuertos" />
           <EntitySet Name="Aviones" EntityType="Self.Aviones" />
-          <EntitySet Name="OrigenDestino" EntityType="Self.OrigenDestino" />
           <EntitySet Name="Pilotos" EntityType="Self.Pilotos" />
           <EntitySet Name="TipoAvion" EntityType="Self.TipoAvion" />
           <EntitySet Name="TipoPiloto" EntityType="Self.TipoPiloto" />
@@ -370,14 +335,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Vuelos_Aviones" Association="Self.FK_Vuelos_Aviones">
             <End Role="Aviones" EntitySet="Aviones" />
-            <End Role="Vuelos" EntitySet="Vuelos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Vuelos_OrigenDestino" Association="Self.FK_Vuelos_OrigenDestino">
-            <End Role="OrigenDestino" EntitySet="OrigenDestino" />
-            <End Role="Vuelos" EntitySet="Vuelos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Vuelos_OrigenDestino1" Association="Self.FK_Vuelos_OrigenDestino1">
-            <End Role="OrigenDestino" EntitySet="OrigenDestino" />
             <End Role="Vuelos" EntitySet="Vuelos" />
           </AssociationSet>
           <AssociationSet Name="FK_Pilotos_TipoPiloto" Association="Self.FK_Pilotos_TipoPiloto">

@@ -1,45 +1,44 @@
 ﻿@model IEnumerable<MVCWingsAir.Models.Aeropuertos>
 
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Lista de Aeropuertos";
 }
 
-<h2>Index</h2>
+<h2>Listado de Aeropuertos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+	@Html.ActionLink( "Crear nuevo Aeropuerto", "Create", null, new { @class = "btn btn-outline-primary" } )
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Municipio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Pais)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Municipio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pais)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdAeropuerto }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdAeropuerto }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdAeropuerto })
-        </td>
-    </tr>
-}
+<table class="table table-sm table-hover table-bordered table-striped">
+	<tr>
+		<th>
+			@Html.DisplayNameFor( model => model.Municipio )
+		</th>
+		<th>
+			@Html.DisplayNameFor( model => model.Estado )
+		</th>
+		<th>
+			@Html.DisplayNameFor( model => model.Pais )
+		</th>
+		<th></th>
+	</tr>
+	@foreach( var item in Model ) {
+		<tr>
+			<td>
+				@Html.DisplayFor( modelItem => item.Municipio )
+			</td>
+			<td>
+				@Html.DisplayFor( modelItem => item.Estado )
+			</td>
+			<td>
+				@Html.DisplayFor( modelItem => item.Pais )
+			</td>
+			<td>
+				@Html.ActionLink( "Editar", "Edit", new { id = item.IdAeropuerto }, new { @class = "btn btn-outline-secondary" } ) |
+				@Html.ActionLink( "Detalles", "Details", new { id = item.IdAeropuerto }, new { @class = "btn btn-outline-primary" } ) |
+				@Html.ActionLink( "Eliminar", "Delete", new { id = item.IdAeropuerto }, new { @class = "btn btn-outline-danger" } )
+			</td>
+		</tr>
+	}
 
 </table>

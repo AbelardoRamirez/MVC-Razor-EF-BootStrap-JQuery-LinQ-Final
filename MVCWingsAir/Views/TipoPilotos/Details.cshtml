@@ -1,26 +1,26 @@
 ﻿@model MVCWingsAir.Models.TipoPiloto
 
 @{
-    ViewBag.Title = "Details";
+	ViewBag.Title = "Detalles";
 }
-
-<h2>Details</h2>
-
-<div>
-    <h4>TipoPiloto</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Tipo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tipo)
-        </dd>
-
-    </dl>
+<div class="row">
+	<div class="col">
+		<h2>Detalles para @Model.Tipo</h2>
+		<div>
+			<h4>TipoPiloto</h4>
+			<hr />
+			<dl class="dl-horizontal">
+				<dt>
+					@Html.DisplayNameFor( model => model.Tipo )
+				</dt>
+				<dd>
+					@Html.DisplayFor( model => model.Tipo )
+				</dd>
+			</dl>
+		</div>
+		<p>
+			@Html.ActionLink( "Editar", "Edit", new { id = Model.IdTipoPiloto }, new { @class = "btn btn-outline-secondary" } ) |
+			@Html.ActionLink( "Ver tipos de Piloto", "Index", null, new { @class = "btn btn-outline-primary" } )
+		</p>
+	</div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdTipoPiloto }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

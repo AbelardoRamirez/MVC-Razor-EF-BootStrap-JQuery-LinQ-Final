@@ -1,32 +1,33 @@
 ﻿@model MVCWingsAir.Models.TipoPiloto
 
 @{
-    ViewBag.Title = "Delete";
+	ViewBag.Title = "Eliminar";
 }
 
-<h2>Delete</h2>
+<div class="row">
+	<div class="col">
+		<h2>Eliminar @Model.Tipo</h2>
+		<h3>¿Estas seguro de eliminar este tipo de piloto?</h3>
+		<div>
+			<h4>Tipo de Piloto</h4>
+			<hr />
+			<dl class="dl-horizontal">
+				<dt>
+					@Html.DisplayNameFor( model => model.Tipo )
+				</dt>
+				<dd>
+					@Html.DisplayFor( model => model.Tipo )
+				</dd>
+			</dl>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>TipoPiloto</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Tipo)
-        </dt>
+			@using( Html.BeginForm() ) {
+				@Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.Tipo)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+				<div class="form-actions no-color">
+					<input type="submit" value="Eliminar" class="btn btn-danger" /> |
+					@Html.ActionLink( "Ver lista de tipos de piloto", "Index", null, new { @class = "btn btn-outline-primary" } )
+				</div>
+			}
+		</div>
+	</div>
 </div>

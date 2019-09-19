@@ -26,8 +26,6 @@ namespace MVCWingsAir.Models
         public virtual Aeropuertos Aeropuertos { get; set; }
         public virtual Aeropuertos Aeropuertos1 { get; set; }
         public virtual Aviones Aviones { get; set; }
-        public virtual OrigenDestino OrigenDestino { get; set; }
-        public virtual OrigenDestino OrigenDestino1 { get; set; }
         public virtual Pilotos Pilotos { get; set; }
     }
 }

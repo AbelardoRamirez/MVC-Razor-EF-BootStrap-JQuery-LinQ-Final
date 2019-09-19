@@ -27,7 +27,6 @@ namespace MVCWingsAir.Models
     
         public virtual DbSet<Aeropuertos> Aeropuertos { get; set; }
         public virtual DbSet<Aviones> Aviones { get; set; }
-        public virtual DbSet<OrigenDestino> OrigenDestino { get; set; }
         public virtual DbSet<Pilotos> Pilotos { get; set; }
         public virtual DbSet<TipoAvion> TipoAvion { get; set; }
         public virtual DbSet<TipoPiloto> TipoPiloto { get; set; }

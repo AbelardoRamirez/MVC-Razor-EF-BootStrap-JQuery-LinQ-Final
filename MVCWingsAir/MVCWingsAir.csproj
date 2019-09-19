@@ -191,9 +191,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Modelo.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\OrigenDestino.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Pilotos.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -203,6 +200,9 @@
     <Compile Include="Models\TipoPiloto.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ValidacionAeropuerto.cs" />
+    <Compile Include="Models\ValidacionTipoAvion.cs" />
+    <Compile Include="Models\ValidacionTipoPiloto.cs" />
     <Compile Include="Models\Vuelos.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -309,36 +309,36 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\TipoPilotos\Create.cshtml" />
-    <Content Include="Views\TipoPilotos\Delete.cshtml" />
-    <Content Include="Views\TipoPilotos\Details.cshtml" />
-    <Content Include="Views\TipoPilotos\Edit.cshtml" />
-    <Content Include="Views\TipoPilotos\Index.cshtml" />
-    <Content Include="Views\TipoAvion\Create.cshtml" />
-    <Content Include="Views\TipoAvion\Delete.cshtml" />
-    <Content Include="Views\TipoAvion\Details.cshtml" />
-    <Content Include="Views\TipoAvion\Edit.cshtml" />
-    <Content Include="Views\TipoAvion\Index.cshtml" />
-    <Content Include="Views\Aeropuertos\Create.cshtml" />
-    <Content Include="Views\Aeropuertos\Delete.cshtml" />
-    <Content Include="Views\Aeropuertos\Details.cshtml" />
-    <Content Include="Views\Aeropuertos\Edit.cshtml" />
-    <Content Include="Views\Aeropuertos\Index.cshtml" />
-    <Content Include="Views\Aviones\Create.cshtml" />
-    <Content Include="Views\Aviones\Delete.cshtml" />
-    <Content Include="Views\Aviones\Details.cshtml" />
-    <Content Include="Views\Aviones\Edit.cshtml" />
-    <Content Include="Views\Aviones\Index.cshtml" />
     <Content Include="Views\Vuelos\Create.cshtml" />
     <Content Include="Views\Vuelos\Delete.cshtml" />
     <Content Include="Views\Vuelos\Details.cshtml" />
     <Content Include="Views\Vuelos\Edit.cshtml" />
     <Content Include="Views\Vuelos\Index.cshtml" />
+    <Content Include="Views\Aeropuertos\Create.cshtml" />
+    <Content Include="Views\Aeropuertos\Delete.cshtml" />
+    <Content Include="Views\Aeropuertos\Details.cshtml" />
+    <Content Include="Views\Aeropuertos\Edit.cshtml" />
+    <Content Include="Views\Aeropuertos\Index.cshtml" />
+    <Content Include="Views\TipoAvion\Create.cshtml" />
+    <Content Include="Views\TipoAvion\Delete.cshtml" />
+    <Content Include="Views\TipoAvion\Details.cshtml" />
+    <Content Include="Views\TipoAvion\Edit.cshtml" />
+    <Content Include="Views\TipoAvion\Index.cshtml" />
     <Content Include="Views\Pilotos\Create.cshtml" />
     <Content Include="Views\Pilotos\Delete.cshtml" />
     <Content Include="Views\Pilotos\Details.cshtml" />
     <Content Include="Views\Pilotos\Edit.cshtml" />
     <Content Include="Views\Pilotos\Index.cshtml" />
+    <Content Include="Views\Aviones\Create.cshtml" />
+    <Content Include="Views\Aviones\Delete.cshtml" />
+    <Content Include="Views\Aviones\Details.cshtml" />
+    <Content Include="Views\Aviones\Edit.cshtml" />
+    <Content Include="Views\Aviones\Index.cshtml" />
+    <Content Include="Views\TipoPilotos\Create.cshtml" />
+    <Content Include="Views\TipoPilotos\Delete.cshtml" />
+    <Content Include="Views\TipoPilotos\Details.cshtml" />
+    <Content Include="Views\TipoPilotos\Edit.cshtml" />
+    <Content Include="Views\TipoPilotos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

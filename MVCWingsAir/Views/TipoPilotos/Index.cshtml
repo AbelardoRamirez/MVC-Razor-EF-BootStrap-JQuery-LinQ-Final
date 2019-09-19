@@ -1,33 +1,34 @@
 ﻿@model IEnumerable<MVCWingsAir.Models.TipoPiloto>
 
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Lista de Tipo de pilotos";
 }
+<div class="row">
+	<div class="col">
+		<h2>Lista de tipo de pilotos</h2>
+		<p>
+			@Html.ActionLink( "Crear nuevo tipo de piloto", "Create", null, new { @class = "btn btn-outline-primary" } )
+		</p>
+		<table class="table table-hover table-sm table-striped table-bordered">
+			<tr>
+				<th>
+					@Html.DisplayNameFor( model => model.Tipo )
+				</th>
+				<th></th>
+			</tr>
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Tipo)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tipo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdTipoPiloto }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdTipoPiloto }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdTipoPiloto })
-        </td>
-    </tr>
-}
-
-</table>
+			@foreach( var item in Model ) {
+				<tr>
+					<td>
+						@Html.DisplayFor( modelItem => item.Tipo )
+					</td>
+					<td>
+						@Html.ActionLink( "Editar", "Edit", new { id = item.IdTipoPiloto }, new { @class = "btn btn-secondary" } ) |
+						@Html.ActionLink( "Detalles", "Details", new { id = item.IdTipoPiloto }, new { @class = "btn btn-primary" } ) |
+						@Html.ActionLink( "Eliminar", "Delete", new { id = item.IdTipoPiloto }, new { @class = "btn btn-danger" } )
+					</td>
+				</tr>
+			}
+		</table>
+	</div>
+</div>
